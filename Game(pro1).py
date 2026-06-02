@@ -1,4 +1,5 @@
 import pygame, sys
+import math
 from pygame.locals import *
 
 # pygame setup
@@ -23,6 +24,7 @@ knop_y = 450
 knop_rect = pygame.Rect(knop_x, knop_y, knop_breedte, knop_hoogte) 
 
 huidig_scherm = "startscherm"
+info_huidige_planeet = None # Hierin worden gegevens per planeet opgeslagen
 
 dt = 0
 vaste_hoogte = 900
@@ -71,14 +73,14 @@ while running:
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1: # 1 = linker muisknop
-                    muis_pos = pygame.Vector2(event.pos)
                     
-                    for naam, kleur, x, y, grootte in planeten: 
-                        planeet_pos = pygame.Vector2(x, y)
+                    for planeet in planeten:
+                        naam, kleur, x, y, grootte = planeet
 
-                        if muis_pos.distance_to(planeet_pos) < grootte:
+                        if math.dist(event.pos, (x, y)) <= grootte: # Checken of de muis zich in de cirkel bevindt
                             print("Je hebt geklikt op:", naam)
                             huidig_scherm = naam 
+                            info_huidige_planeet = planeet # Hier worden de planeet gegevens onthouden
         else:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:  # Druk op ESC om terug te gaan
@@ -132,6 +134,16 @@ while running:
             p_tekst = naam_font.render(naam, True, "white") 
             p_tekst_x = x - (p_tekst.get_width() / 2) 
             screen.blit(p_tekst, (p_tekst_x, y - grootte - 25))
+    elif huidig_scherm in ["Mercurius", "Venus", "Mars", "Jupiter", "Saturnus", "Uranus", "Neptunus", "Aarde"]:
+        if info_huidige_planeet:
+            naam, kleur, x, y, grootte = info_huidige_planeet
+
+            screen.fill(kleur) # vul het scherm met de kleur van de gekozen planeet
+            tekst_kleur = "white" if kleur == "black" else "black" # Als de kleur van de planeet zwart is, voeg dan wit als tekst
+            titel = titel_font.render(naam, True, tekst_kleur) # Teken de naam van de planeet
+            screen.blit(titel, ((800/2) - (titel.get_width() /2), 200))
+            terug_tekst = knop_font.render("Druk op ESC om terug naar het planeten menu te gaan", True, tekst_kleur)
+            screen.blit(terug_tekst, ((800 / 2) - (terug_tekst.get_width() / 2 ), 500))
 
     pygame.display.flip()
 
