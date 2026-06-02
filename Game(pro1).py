@@ -13,6 +13,7 @@ titel_font = pygame.font.SysFont("Arial", 60, bold=True)
 knop_font = pygame.font.SysFont("Arial", 30)
 uitleg_font = pygame.font.SysFont("Arial", 30)
 naam_font = pygame.font.SysFont("Arial", 20, bold=True)
+esc_font = pygame.font.SysFont("Arial", 15) 
 
 # Knop en titel posities
 titel_y_positie = 300
@@ -142,8 +143,8 @@ while running:
             tekst_kleur = "white" if kleur == "black" else "black" # Als de kleur van de planeet zwart is, voeg dan wit als tekst
             titel = titel_font.render(naam, True, tekst_kleur) # Teken de naam van de planeet
             screen.blit(titel, ((800/2) - (titel.get_width() /2), 200))
-            terug_tekst = knop_font.render("Druk op ESC om terug naar het planeten menu te gaan", True, tekst_kleur)
-            screen.blit(terug_tekst, ((800 / 2) - (terug_tekst.get_width() / 2 ), 500))
+            terug_tekst = esc_font.render("Druk op ESC om terug naar het planeten menu te gaan.", True, tekst_kleur)
+            screen.blit(terug_tekst, (10, 10))
 
     pygame.display.flip()
 
