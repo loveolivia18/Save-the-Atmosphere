@@ -141,7 +141,7 @@ while running:
 
             screen.fill(kleur) # vul het scherm met de kleur van de gekozen planeet
             tekst_kleur = "white" if kleur == "black" else "black" # Als de kleur van de planeet zwart is, voeg dan wit als tekst
-            titel = titel_font.render(naam, True, tekst_kleur) # Teken de naam van de planeet
+            titel = titel_font.render("Welkom op planeet " + naam, True, tekst_kleur) # Teken de naam van de planeet
             screen.blit(titel, ((800/2) - (titel.get_width() /2), 200))
             terug_tekst = esc_font.render("Druk op ESC om terug naar het planeten menu te gaan.", True, tekst_kleur)
             screen.blit(terug_tekst, (10, 10))
