@@ -155,19 +155,17 @@ while running:
                 titel_rect = titel.get_rect()
                 titel_rect.center = (400, 500)
 
-            pop_x = 730
-            pop_y = 930
+            pygame.draw.circle(screen, "blue", (730, 930,), 30) # Het poppetje tekenen
+            ballon_rect = pygame.Rect(450, 900, 230, 60) # Het tekst bubbel tekenen
+            pygame.draw.rect(screen, "white", ballon_rect, border_radius=10)
 
-            pygame.draw.circle(screen, "blue", (pop_x, pop_y), 30,) # Poppetje als blauwe cirkel
-            ballon_rect = pygame.Rect(450, 900, 230, 60)
-            pygame.draw.rect(screen, "white", ballon_rect, border_radius=10) # Teken de tekstbubbel (witte rechthoek)
+            punt1 = (675, 920)
+            punt2 = (675, 940)
+            punt3 = (705, 925)
+            pygame.draw.polygon(screen, "white", [punt1, punt2, punt3]) # Het bubbel uitsteeksel tekenen
 
             pop_tekst = pop_font.render("Dit is " + naam + "!", True, "black")
             screen.blit(pop_tekst, (465, 920))
-
-
-            screen.blit(titel, titel_rect) # Teken de tekst precies in het midden van het scherm
-            
 
     pygame.display.flip()
 
