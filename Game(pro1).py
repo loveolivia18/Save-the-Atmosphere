@@ -13,7 +13,8 @@ titel_font = pygame.font.SysFont("Arial", 45, bold=True)
 knop_font = pygame.font.SysFont("Arial", 30)
 uitleg_font = pygame.font.SysFont("Arial", 30)
 naam_font = pygame.font.SysFont("Arial", 20, bold=True)
-esc_font = pygame.font.SysFont("Arial", 15) 
+esc_font = pygame.font.SysFont("Arial", 15)
+pop_font = pygame.font.SysFont("Ariel", 16) # Lettertype poppetje tekstbubbel 
 
 # Knop en titel posities
 titel_y_positie = 300
@@ -154,7 +155,18 @@ while running:
                 titel_rect = titel.get_rect()
                 titel_rect.center = (400, 500)
 
-                screen.blit(titel, titel_rect) # Teken de tekst precies in het midden van het scherm
+            pop_x = 730
+            pop_y = 930
+
+            pygame.draw.circle(screen, "blue", (pop_x, pop_y), 30,) # Poppetje als blauwe cirkel
+            ballon_rect = pygame.Rect(450, 900, 230, 60)
+            pygame.draw.rect(screen, "white", ballon_rect, border_radius=10) # Teken de tekstbubbel (witte rechthoek)
+
+            pop_tekst = pop_font.render("Dit is " + naam + "!", True, "black")
+            screen.blit(pop_tekst, (465, 920))
+
+
+            screen.blit(titel, titel_rect) # Teken de tekst precies in het midden van het scherm
             
 
     pygame.display.flip()
