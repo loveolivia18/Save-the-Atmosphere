@@ -27,7 +27,7 @@ knop_rect = pygame.Rect(knop_x, knop_y, knop_breedte, knop_hoogte)
 
 huidig_scherm = "startscherm"
 info_huidige_planeet = None # Hierin worden gegevens per planeet opgeslagen
-planeet_klik_tijd = 0
+planeet_klik_tijd = pygame.time.get_ticks()
 
 dt = 0
 vaste_hoogte = 900
@@ -89,6 +89,7 @@ while running:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:  # Druk op ESC om terug te gaan
                     huidig_scherm = "uitleg_scherm"
+                    planeet_klik_tijd = pygame.time.get_ticks()
 
     # Delta time berekenen
     dt = clock.tick(60) / 1000
@@ -154,6 +155,7 @@ while running:
 
                 titel_rect = titel.get_rect()
                 titel_rect.center = (400, 500)
+                screen.blit(titel, titel_rect) 
 
             pygame.draw.circle(screen, "blue", (730, 930,), 45) # Het poppetje tekenen
             ballon_rect = pygame.Rect(200, 860, 450, 100) # Het tekst bubbel tekenen
