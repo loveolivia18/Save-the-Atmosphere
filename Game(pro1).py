@@ -91,10 +91,10 @@ while running:
                     huidig_scherm = "uitleg_scherm"
                     planeet_klik_tijd = pygame.time.get_ticks()
 
-    # Delta time berekenen
+    
     dt = clock.tick(60) / 1000
 
-    # 2. SCHERM TEKENEN & LOGICA
+    
     if huidig_scherm == "startscherm":
         screen.fill("green") 
         
@@ -150,24 +150,27 @@ while running:
             screen.blit(terug_tekst, (10, 10))
             
             huidige_tijd = pygame.time.get_ticks()
-            if huidige_tijd - planeet_klik_tijd < 5000: # 5 seconden
+            tijd_voorbij = huidige_tijd - planeet_klik_tijd
+            
+            if tijd_voorbij < 5000: # 5 seconden
                 titel = titel_font.render("Welkom op planeet " + naam, True, tekst_kleur) # Teken de naam van de planeet
-
                 titel_rect = titel.get_rect()
                 titel_rect.center = (400, 500)
-                screen.blit(titel, titel_rect) 
+                screen.blit(titel, titel_rect)
+            
+            elif tijd_voorbij >= 7000:
+                pygame.draw.circle(screen, "blue", (730, 930,), 45) # Het poppetje tekenen
 
-            pygame.draw.circle(screen, "blue", (730, 930,), 45) # Het poppetje tekenen
-            ballon_rect = pygame.Rect(200, 860, 450, 100) # Het tekst bubbel tekenen
-            pygame.draw.rect(screen, "white", ballon_rect, border_radius=10)
+                ballon_rect = pygame.Rect(200, 860, 450, 100) # Het tekst bubbel tekenen
+                pygame.draw.rect(screen, "white", ballon_rect, border_radius=10)
 
-            punt1 = (645, 910)
-            punt2 = (645, 930)
-            punt3 = (675, 925)
-            pygame.draw.polygon(screen, "white", [punt1, punt2, punt3]) # Het bubbel uitsteeksel tekenen
+                punt1 = (645, 910)
+                punt2 = (645, 930)
+                punt3 = (675, 925)
+                pygame.draw.polygon(screen, "white", [punt1, punt2, punt3]) # Het bubbel uitsteeksel tekenen
 
-            pop_tekst = pop_font.render("Dit is " + naam + "!", True, "black")
-            screen.blit(pop_tekst, (220, 920))
+                pop_tekst = pop_font.render("Dit is " + naam + "!", True, "black")
+                screen.blit(pop_tekst, (220, 920))
 
     pygame.display.flip()
 
