@@ -14,7 +14,7 @@ knop_font = pygame.font.SysFont("Arial", 30)
 uitleg_font = pygame.font.SysFont("Arial", 30)
 naam_font = pygame.font.SysFont("Arial", 20, bold=True)
 esc_font = pygame.font.SysFont("Arial", 15)
-pop_font = pygame.font.SysFont("Ariel", 16) # Lettertype poppetje tekstbubbel 
+pop_font = pygame.font.SysFont("Arial", 16) # Lettertype poppetje tekstbubbel 
 
 # Knop en titel posities
 titel_y_positie = 300
@@ -46,6 +46,49 @@ planeet7 = ("Neptunus", "yellow", 60, 50, 40)
 planeet8 = ("Aarde", "blue", 300, 750, 40)
 
 planeten = [planeet1, planeet2, planeet3, planeet4, planeet5, planeet6, planeet7, planeet8]
+
+planeten_teksten = {
+    "Venus": [
+        "Giftige gaswolken vullen de lucht. Je energie", 
+        "raakt langzaam op, dus werk snel! Let op:",
+        "schoten kunnen oploffingen veroorzaken.",
+        "Verzamel de Toxic Filter Module!"
+    ],
+    "Mars": [
+        "Sterke stofstormen beperken je zicht.", 
+        "Rondvliegende brokstukken kunnen je schip",
+        "beschadigen. Ontwijk de gevaren en",
+        "vind de Dust Shield Layer!"
+    ],
+    "Jupiter": [
+        "Jupiter wordt geteisterd door krachtige",
+        "bliksemstormen. Blijf niet te lang stil hangen",
+        "anders wordt je geraakt. Zoek de Storm Dampener en blijf in beweging!"
+    ],
+    "Saturnus": [
+        "De ringen van Saturnus zitten vol gevaarlijk", 
+        "ruimtepuin. Brokstukken vliegen voordurend",
+        "op je af. Ontwijk alles wat je raakt en",
+        "verzamel het Debris Shield!"
+    ],
+    "Uranus": [
+        "Ijsvelden verstoren de besturing van je schip.", 
+        "Elke beweging reageert trager dan normaal.",
+        "Houd controle over je koers en vind de Gravity Stabilizer!"
+    ],
+    "Neptunus": [
+        "Dit is de koudste planeet. Blijf niet te lang",
+        "stilstaan, anders bevriest je schip.",
+        "Sneeuwstormen kunnen je vastzetten.",
+        "Zoek de Cryo Regulation Core!"
+    ],
+    "Mercurius": [
+        "De hitte op deze planeet is extreem. Felle",
+        "zonnevlammen kunnen je zicht verstoren en je schip",
+        "wordt steeds moeilijker bestuurbaar. Blijf gefocust en",
+        "vindt de Heat Stabilizer!"
+    ]
+}
 
 running = True
 while running:
@@ -99,7 +142,7 @@ while running:
         screen.fill("green") 
         
         # Titel
-        titel_tekst = titel_font.render("*GAME NAME*", True, "black")
+        titel_tekst = titel_font.render("Save the Athmosphere", True, "black")
         titel_x = (800 / 2) - (titel_tekst.get_width() / 2)
         screen.blit(titel_tekst, (titel_x, titel_y_positie))
         
@@ -153,7 +196,7 @@ while running:
             tijd_voorbij = huidige_tijd - planeet_klik_tijd
             
             if tijd_voorbij < 5000: # 5 seconden
-                titel = titel_font.render("Welkom op planeet " + naam, True, tekst_kleur) # Teken de naam van de planeet
+                titel = titel_font.render(naam, True, tekst_kleur) # Teken de naam van de planeet
                 titel_rect = titel.get_rect()
                 titel_rect.center = (400, 500)
                 screen.blit(titel, titel_rect)
@@ -161,16 +204,22 @@ while running:
             elif tijd_voorbij >= 7000:
                 pygame.draw.circle(screen, "blue", (730, 930,), 45) # Het poppetje tekenen
 
-                ballon_rect = pygame.Rect(200, 860, 450, 100) # Het tekst bubbel tekenen
+                ballon_rect = pygame.Rect(200, 840, 450, 120) # Het tekst bubbel tekenen
                 pygame.draw.rect(screen, "white", ballon_rect, border_radius=10)
 
                 punt1 = (645, 910)
                 punt2 = (645, 930)
                 punt3 = (675, 925)
                 pygame.draw.polygon(screen, "white", [punt1, punt2, punt3]) # Het bubbel uitsteeksel tekenen
+                
+                if naam in planeten_teksten:
+                    lijst_met_regels = planeten_teksten[naam]
 
-                pop_tekst = pop_font.render("Dit is " + naam + "!", True, "black")
-                screen.blit(pop_tekst, (220, 920))
+                    y_offset = 850 # Regelafstand startpunt (y-as)
+                    for regel in lijst_met_regels:
+                        pop_tekst = pop_font.render(regel, True, "black")
+                        screen.blit(pop_tekst, (220, y_offset))
+                        y_offset += 22 # Delta y-as p.regel
 
     pygame.display.flip()
 

@@ -46,4 +46,6 @@ De Eind-Cutscene: Een opeenvolging van 2 of 3 simpele illustraties die laten zie
 
 ⏱️ Gemini Hulptip voor Ronde 2: Vraag mij om de code waarmee je illustraties kunt laten 'overlappen' (layering). Dit is essentieel voor de sterren die verstopt moeten zitten achter of in de obstakel-illustraties, en voor de gaswolken die bovenop de actie moeten zweven.
 
-Dit is redelijk haalbaar. Misschien zal het wat langer duren en meer aandacht vereisen voor het invoeren van de illustraties en de door python gegenereerde visualisaties, maar verder zou er in ieder geval een korte, vereenvoudigde versie van de game binnen die tijd gemaakt kunnen worden. 
+Dit is redelijk haalbaar. Misschien zal het wat langer duren en meer aandacht vereisen voor het invoeren van de illustraties en de door python gegenereerde visualisaties, maar verder zou er in ieder geval een korte, vereenvoudigde versie van de game binnen die tijd gemaakt kunnen worden.
+
+Alle prototypes bevinden zich in test.py! 
